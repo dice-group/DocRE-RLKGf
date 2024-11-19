@@ -1,6 +1,12 @@
 # DocRE-RLKGf
 This is the repo for our upcoming paper
 
+### Scoring Prompts
+The following line of code will start scoring the triples:
+
+`python calculate_triple_scores.py --triples_file triples.csv --sentences_file sentences.csv`
+
+
 ### Training DPO
 To train the dpo use the folloing line of code
 
