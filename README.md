@@ -10,6 +10,10 @@ To fine tune the the Large language model for DocRE using human annotated data r
 
 ### Generate output
 To generate the output for the DS version please use the following code:
+`generate_output.ipynb`
+1. Provide the model you saved while fine-tuning
+2. Provide the prompt version of the distant supervsision dataset
+3. Save the output in the csv format
 
 
 ### Scoring Prompts
