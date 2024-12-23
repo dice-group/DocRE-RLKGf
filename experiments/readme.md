@@ -1,24 +1,22 @@
 # DocRE-RLKGf
 
-**DocRE-RLKGf** (Document-level Relation Extraction with Reinforcement Learning Knowledge Graph Fusion) is a framework designed for extracting relations from documents using reinforcement learning and knowledge graph-based approaches. This method leverages the strengths of knowledge graphs and deep reinforcement learning to improve the precision of relation extraction tasks.
+**DocRE-RLKGf** (Document-level Relation Extraction with Reinforcement Learning using Knowledge Graph feedback) is an approach designed for extracting relations from documents using reinforcement learning and knowledge graph. This method utilizes the strengths of knowledge graphs and reinforcement learning to improve the accuracy of Large Langauge Models (LLMs) for DocRE.
 
----
 
 ## Overview
 
 Relation extraction is a fundamental task in natural language processing that aims to identify and classify relationships between entities in text. Document-level relation extraction expands this task to process relationships across entire documents rather than isolated sentences, addressing more complex relationship scenarios.
 
-The **DocRE-RLKGf** framework integrates reinforcement learning (RL) and knowledge graph (KG) techniques to:
+The **RLKGf** integrates reinforcement learning (RL) and knowledge graph (KG) in the RLHF paradigm:
 
-1. Enhance the accuracy of relation extraction by utilizing prior knowledge encoded in a KG.
-2. Employ RL strategies to iteratively refine extraction decisions based on document context and KG features.
+1. Enhance the accuracy of relation extraction by utilizing knowledge graphs is a scorer.
+2. Employ RL strategies to iteratively refine extraction decisions based on document context and KG feadback.
 
----
 
 ## Key Features
 
-- **Knowledge Graph Fusion**: Combines textual data with external knowledge graphs to enrich context and improve relation extraction.
-- **Reinforcement Learning**: Implements RL to optimize the relation extraction process dynamically.
+- **Knowledge Graph based Scoring Function**: Exploit KGs to score the outputs of LLMs.
+- **Reinforcement Learning**: Implements RL to optimize the relation extraction process.
 - **Document-Level Processing**: Designed to work across entire documents, handling complex multi-entity relationships.
 
 ---
@@ -27,7 +25,7 @@ The **DocRE-RLKGf** framework integrates reinforcement learning (RL) and knowled
 
 Ensure the following dependencies are installed:
 
-- Python >= 3.6
+- Python >= 3.9
 - PyTorch >= 1.8
 - Transformers >= 4.0
 - Additional requirements listed in `requirements.txt`
@@ -44,23 +42,55 @@ pip install -r requirements.txt
 
 ### Data Preparation
 
-1. Download the dataset from the provided link and place it in the `data/` directory.
-2. Preprocess the dataset using the script provided in `scripts/preprocess.py`:
+1. Download the dataset from the provided link given in the dataset readme file and place it in the `dataset/` directory.
+2. Preprocess the dataset using the script provided in `dataset/prompt_data_prep.py`:
 
-   ```bash
-   python scripts/preprocess.py --input data/raw --output data/processed
-   ```
 
-### Training
+### Fine-Tuning LLM
 
-To train the model, execute the following command:
+To fine-tune the Large Language Model (LLM) for DocRE using human-annotated data, use the `fine-tune-LLM.ipynb` notebook. Please ensure the following adjustments are made before running the notebook:
+
+1. Provide the link to the pre-trained model. If using a model from Hugging Face, include your access token for authentication.
+
+2. Update the OUTPUT_DIRECTORY variable to specify the directory where the results and fine-tuned model will be saved.
+
+3. Prepare a prompt-based version of the human-annotated DocRED dataset using the dataset preparation script provided in the repository.
+
+4. Set an appropriate seq_length value for the dataset. Adjust other training parameters such as batch size, learning rate, and epochs to suit your specific requirements (optional).
+
+### Generate Output
+
+To generate the output for the DS (Distant Supervision) version, use the ```generate_output.ipynb``` notebook. Please ensure the following adjustments:
+
+1. Provide the model you saved during fine-tuning.
+
+2. Provide the prompt-based version of the distant supervision dataset.
+
+3. Save the output in CSV format.
+
+### Scoring Prompts
+
+To score the extracted triples, execute the following command:
 
 ```bash
-python train.py --config configs/train_config.json
+python calculate_triple_scores.py --triples_file triples.csv --sentences_file sentences.csv
 ```
 
-- `--config`: Specifies the configuration file for training parameters.
-- Example configuration files can be found in the `configs/` directory.
+### Training DPO
+
+To train the DPO (Direct Preference Optimization), run the following command:
+```bash
+python dpo.py --dataset_path datasets/dpo_scored.csv \
+  --model_checkpoint meta-llama/Meta-Llama-3.1-8B-Instruct \
+  --output_dir ./RL_final_checkpoints \
+  --max_steps 1000 \
+  --logging_steps 1 \
+  --save_steps 500 \
+  --learning_rate 1e-4
+``` 
+### Training Reward Model (Optional)
+
+If you choose to run PPO (Proximal Policy Optimization) instead of DPO, you need to train a reward model first. Use the ```reward_model_training.ipynb``` notebook. The code is self-explanatory, and you can adjust the parameters according to your needs.
 
 ### Evaluation
 
@@ -75,45 +105,26 @@ python evaluate.py --model checkpoint/best_model.pth --data data/processed/test
 
 ### Inference
 
-For inference on new documents, run:
+For inference on new documents, run the same code of output generation but provide the final model after running DPO instead of using Fine-tuned model:
 
 ```bash
-python infer.py --input data/new_document.txt --output results/output.json
+generate_output.ipynb
 ```
 
-- `--input`: Path to the input text file.
-- `--output`: Path to save the extracted relations in JSON format.
-
----
-
-## Directory Structure
-
-```
-.
-├── configs/              # Configuration files for training and evaluation
-├── data/                 # Dataset directory
-├── scripts/              # Utility scripts (e.g., preprocessing)
-├── models/               # Model definitions and training logic
-├── results/              # Output results directory
-├── train.py              # Training script
-├── evaluate.py           # Evaluation script
-├── infer.py              # Inference script
-└── README.md             # Documentation
-```
 
 ---
 
 ## Results
 
-The framework achieves state-of-the-art performance on benchmark datasets for document-level relation extraction.
+RLKGf achieves state-of-the-art performance on benchmark datasets for document-level relation extraction.
 
 ### Key Metrics:
 
-| Metric            | Value |
+| Dataset            | F1 |
 |--------------------|-------|
-| Precision         | 85.4% |
-| Recall            | 83.2% |
-| F1-Score          | 84.3% |
+| DocRED         | 71.3% |
+| Re-DocRED            | 79.1% |
+| DWIE         | 83.3% |
 
 ---
 
@@ -122,8 +133,6 @@ The framework achieves state-of-the-art performance on benchmark datasets for do
 For more details, please refer to the following resources:
 
 - Original paper: [DocRE-RLKGf Paper](#)
-- Dataset: [Dataset Link](#)
-- Knowledge Graphs: [External KG Resource](#)
 
 ---
 
@@ -137,8 +146,8 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 
 For questions or issues, please contact:
 
-- Maintainer: [Your Name](mailto:your.email@example.com)
-- GitHub Issues: [Issue Tracker](https://github.com/dice-group/DocRE-RLKGf/issues)
+- Maintainer: [Your Name](Will give info soon) 
+- GitHub Issues: [Issue Tracker](Under review)
 
 ---
 
@@ -148,10 +157,10 @@ If you use this framework in your research, please cite the following:
 
 ```bibtex
 @article{docre_rlkgf,
-  title={Document-level Relation Extraction with Reinforcement Learning Knowledge Graph Fusion},
+  title={RLKGf: Reinforcement Learning using Knowledge Graph Feedback for Document-level Relation Extraction},
   author={Your Name},
   journal={Your Journal},
-  year={2023}
+  year={2025}
 }
 ```
 
