@@ -19,7 +19,7 @@ The **RLKGf** integrates reinforcement learning (RL) and knowledge graph (KG) in
 - **Reinforcement Learning**: Implements RL to optimize the relation extraction process.
 - **Document-Level Processing**: Designed to work across entire documents, handling complex multi-entity relationships.
 
----
+![architecture](https://github.com/dice-group/DocRE-RLKGf/blob/main/rlkgf.drawio.svg)
 
 ## Requirements
 
@@ -138,7 +138,7 @@ For more details, please refer to the following resources:
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+The source code of this repo is published under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 ---
 
