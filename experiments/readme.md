@@ -146,7 +146,7 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 
 For questions or issues, please contact:
 
-- Maintainer: [Your Name](Will give info soon) 
+- Maintainer: [Email](Will give info soon) 
 - GitHub Issues: [Issue Tracker](Under review)
 
 ---
