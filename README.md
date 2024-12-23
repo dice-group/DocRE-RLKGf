@@ -34,3 +34,9 @@ To train the dpo use the folloing line of code
                     --logging_steps 1 \
                     --save_steps 500 \
                     --learning_rate 1e-4`
+
+### Training Reward Model (Optional)
+If you choose to run the PPO instead of DPO you need to run the script inf the reward model to train a reward model first. 
+The code is self explanatory and the user can change the parameter accordingly
+
+`reward_model_training.ipynb`
