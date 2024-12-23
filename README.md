@@ -40,3 +40,7 @@ If you choose to run the PPO instead of DPO you need to run the script inf the r
 The code is self explanatory and the user can change the parameter accordingly
 
 `reward_model_training.ipynb`
+
+### To Prepare Data 
+We have provided the details and download links in the `dataset` folder also adjust the code `dataset/prompt_data_prep.py` where we provide the function to create the prompt based data. Please don't include answer while conveting dev and test set to this style.
+
