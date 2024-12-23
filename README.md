@@ -1,5 +1,16 @@
 # DocRE-RLKGf
-This is the repo for our upcoming paper
+This repo contains code for our RLKGf for DocRE
+
+### Fine Tuning LLMs
+To fine tune the the Large language model for DocRE using human annotated data run the `fine-tune-LLM.ipynb` To properly run the code please correct the follwoing: 
+1. Provide link of the model (If you provide link from Hugginface please also use your access token)
+2. Replace the OUTPUT_DIRECTORY to your own directory.
+3. Please provide the prompt version of human annotated DocRED dataset (You can create the prompt version using our dataset code)
+4. Provide the seq_length value to the dataset and also adjust the training paramaeter according to particular need. (optional)
+
+### Generate output
+To generate the output for the DS version please use the following code:
+
 
 ### Scoring Prompts
 The following line of code will start scoring the triples:
