@@ -1,7 +1,7 @@
 # DocRE-RLKGf
 This repo contains code for our RLKGf for DocRE
 
-![architecture](https://github.com/dice-group/DocRE-RLKGf/blob/main/rlkgf%20(6).pdf)
+![architecture](https://github.com/dice-group/DocRE-RLKGf/blob/main/rlkgf.drawio.svg)
 
 ### Fine Tuning LLMs
 To fine tune the the Large language model for DocRE using human annotated data run the `fine-tune-LLM.ipynb` To properly run the code please correct the follwoing: 
