@@ -1,16 +1,18 @@
 # RLKGf
 
 **DocRE-RLKGf** (Document-level Relation Extraction with Reinforcement Learning using Knowledge Graph feedback) is an approach designed for extracting relations from documents using reinforcement learning and knowledge graph. This method utilizes the strengths of knowledge graphs and reinforcement learning to improve the accuracy of Large Langauge Models (LLMs) for DocRE.
-
+![architecture](https://github.com/dice-group/DocRE-RLKGf/blob/main/rlkgf.drawio.svg)
 
 ## Overview
 
 Relation extraction is a fundamental task in natural language processing that aims to identify and classify relationships between entities in text. Document-level relation extraction expands this task to process relationships across entire documents rather than isolated sentences, addressing more complex relationship scenarios.
 
+
 The **RLKGf** integrates reinforcement learning (RL) and knowledge graph (KG) in the RLHF paradigm:
 
 1. Enhance the accuracy of relation extraction by utilizing knowledge graphs is a scorer.
 2. Employ RL strategies to iteratively refine extraction decisions based on document context and KG feadback.
+
 
 
 ## Key Features
@@ -19,21 +21,16 @@ The **RLKGf** integrates reinforcement learning (RL) and knowledge graph (KG) in
 - **Reinforcement Learning**: Implements RL to optimize the relation extraction process.
 - **Document-Level Processing**: Designed to work across entire documents, handling complex multi-entity relationships.
 
-![architecture](https://github.com/dice-group/DocRE-RLKGf/blob/main/rlkgf.drawio.svg)
 
 ## Requirements
 
-Ensure the following dependencies are installed:
+Create the Environment: Use the following command to create the environment from the YAML file.
 
-- Python >= 3.9
-- PyTorch >= 1.8
-- Transformers >= 4.0
-- Additional requirements listed in `requirements.txt`
-
-Install dependencies by running:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yaml
+
+conda activate sparqlgen
 ```
 
 ---
@@ -92,6 +89,8 @@ python dpo.py --dataset_path datasets/dpo_scored.csv \
 
 If you choose to run PPO (Proximal Policy Optimization) instead of DPO, you need to train a reward model first. Use the ```reward_model_training.ipynb``` notebook. The code is self-explanatory, and you can adjust the parameters according to your needs.
 
+---
+
 ### Evaluation
 
 Evaluate the trained model using:
@@ -112,19 +111,19 @@ generate_output.ipynb
 ```
 
 
----
 
 ## Results
 
 RLKGf achieves state-of-the-art performance on benchmark datasets for document-level relation extraction.
 
+
 ### Key Metrics:
 
-| Dataset            | F1 |
+| Dataset            | F1    |
 |--------------------|-------|
-| DocRED         | 71.3% |
-| Re-DocRED            | 79.1% |
-| DWIE         | 83.3% |
+| DocRED             | 71.3% |
+| Re-DocRED          | 79.1% |
+| DWIE               | 83.3% |
 
 ---
 
@@ -134,13 +133,11 @@ For more details, please refer to the following resources:
 
 - Original paper: [DocRE-RLKGf Paper](#)
 
----
 
 ## License
 
 The source code of this repo is published under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
----
 
 ## Contact
 
@@ -149,7 +146,6 @@ For questions or issues, please contact:
 - Maintainer: [Email](Will give info soon) 
 - GitHub Issues: [Issue Tracker](Under review)
 
----
 
 ## Citation
 
