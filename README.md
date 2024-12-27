@@ -133,9 +133,9 @@ The source code of this repo is published under the [GNU General Public License 
 ## Contact
 
 For questions or issues, please contact:
-
-- Maintainer: [Email](Will give info soon) 
-- GitHub Issues: [Issue Tracker](Under review)
+ Due to annonymous submission the information will be provided after reviews.
+- Maintainer:  
+- GitHub Issues:
 
 
 ## Citation
