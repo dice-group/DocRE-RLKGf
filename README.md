@@ -145,8 +145,8 @@ If you use this framework in your research, please cite the following:
 ```bibtex
 @article{docre_rlkgf,
   title={RLKGf: Reinforcement Learning using Knowledge Graph Feedback for Document-level Relation Extraction},
-  author={Your Name},
-  journal={Your Journal},
+  author={-},
+  journal={-},
   year={2025}
 }
 ```
