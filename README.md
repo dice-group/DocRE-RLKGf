@@ -1,4 +1,4 @@
-# RLKGf
+# DocRE using RL from KGs Feedback
 
 **DocRE-RLKGf** (Document-level Relation Extraction with Reinforcement Learning using Knowledge Graph feedback) is an approach designed for extracting relations from documents using reinforcement learning and knowledge graph. This method utilizes the strengths of knowledge graphs and reinforcement learning to improve the accuracy of Large Langauge Models (LLMs) for DocRE.
 ![architecture](https://github.com/dice-group/DocRE-RLKGf/blob/main/rlkgf.drawio.svg)
