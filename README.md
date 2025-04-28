@@ -52,7 +52,7 @@ python dataset/prompt_data_prep.py \
 To fine-tune the Large Language Model (LLM) for DocRE using human-annotated data, use the `fine-tune-LLM.ipynb` notebook or run the following command:
 
 ```bash
-python src/fine_tune_llm.py \
+python  fine_tune_llm.py \
   --model_name "meta-llama/Meta-Llama-3.1-8B-Instruct" \
   --train_dataset "datasets/train_docred_prompt_wES.csv" \
   --dev_dataset "datasets/dev_docred_prompt_wES.csv" \
@@ -78,7 +78,7 @@ Parameters:
 To generate outputs for the DS (Distant Supervision) version, use the `generate_output.ipynb` notebook or run the following command:
 
 ```bash
-python src/generate_outputs.py \
+python  generate_outputs.py \
   --model_path "output/fine_tuned_model" \
   --dataset_path "datasets/ds_docred_prompt_wES.csv" \
   --output_path "output/generated_outputs.csv" \
@@ -154,7 +154,7 @@ Parameters:
 If you choose to run PPO (Proximal Policy Optimization) instead of DPO, you need to train a reward model first. Use the `reward_model_training.ipynb` notebook or run the following command:
 
 ```bash
-python src/train_reward_model.py \
+python  train_reward_model.py \
   --model_name "gpt2" \
   --dataset_path "datasets/rewardModelTrain.csv" \
   --output_dir "output/reward_model" \
@@ -178,7 +178,7 @@ Parameters:
 To train the model using PPO with the trained reward model, run the following command:
 
 ```bash
-python src/ppo_trainer.py \
+python  ppo_trainer.py \
   --model_name "meta-llama/Meta-Llama-3.1-8B-Instruct" \
   --reward_model_name "output/reward_model" \
   --dataset_path "datasets/ppo_train.csv" \
@@ -206,7 +206,7 @@ Parameters:
 For inference on new documents, use the fine-tuned model or the model trained with DPO/PPO:
 
 ```bash
-python src/generate_outputs.py \
+python  generate_outputs.py \
   --model_path "output/dpo_model/final_checkpoint" \
   --dataset_path "datasets/test_docred_prompt_wES.csv" \
   --output_path "output/test_predictions.csv" \
