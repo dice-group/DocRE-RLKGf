@@ -297,7 +297,7 @@ Evidence Sentences: [list of sentence IDs]
 Example Output:
 ```
 
-We used the same prompt for few-shots but uses <<Examples>> after Instruction
+We used the same prompt for few-shots but uses \<<Examples\>> before Instruction from the training set.
 ## Results
 
 RLKGf achieves state-of-the-art performance on benchmark datasets for document-level relation extraction.
